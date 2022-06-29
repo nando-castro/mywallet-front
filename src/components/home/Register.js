@@ -1,34 +1,29 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import logo from "../../assets/img/logo.png";
-//import axios from 'axios';
+import styled from 'styled-components';
+import logo from '../../assets/img/logo.png';
+import axios from 'axios';
 
-function Login() {
-  return (
-    <Home>
-      <img src={logo} alt="MyWallet" />
-      <Form>
-        <input
-          type="text"
-          placeholder="E-mail"
-          required /* value={email} onChange={(e) => setEmail(e.target.value)} */
-        />
-        <input
-          type="text"
-          placeholder="Senha"
-          required /* value={password} onChange={(e) => setPassword(e.target.value)} */
-        />
-      </Form>
-      <div className="button" /* onClick={handleLogin} */>Entrar</div>
-      <Link to="/sign-up">
-        <p>Primeira vez? Cadastre-se!</p>
-      </Link>
-    </Home>
-  );
+function Register() {
+
+    return (
+        <Registe>
+            <img src={logo} alt="MyWallet" />
+            <Form>
+                <input type="text" placeholder='Nome' required /* value={name} onChange={(e) => setEmail(e.target.value)} */ />
+                <input type="text" placeholder='E-mail' required /* value={email} onChange={(e) => setPassword(e.target.value)} */ />
+                <input type="text" placeholder='Senha' required /* value={password} onChange={(e) => setName(e.target.value)} */ />
+                <input type="text" placeholder='Confirme a senha' required /* value={passconfirm} onChange={(e) => setImage(e.target.value)} */ />
+            </Form>
+            <div className="button" /* onClick={SignUp} */>Cadastrar</div>
+            <Link to="/" >
+                <p>Já tem uma conta? Faça login!</p>
+            </Link>
+        </Registe>
+    );
 }
 
-const Home = styled.div`
+const Registe = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;
@@ -83,7 +78,7 @@ const Home = styled.div`
 
   p {
     margin-top: 20px;
-    
+
     font-family: "Raleway";
     font-style: normal;
     font-weight: 700;
@@ -102,4 +97,4 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-export default Login;
+export default Register;
