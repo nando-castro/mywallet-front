@@ -2,9 +2,39 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/img/logo.png";
-//import axios from 'axios';
+//import axios from "axios";
 
 function Login() {
+  
+  /* const API_URL = '';
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleSignIn() {
+    const body = {
+      email: email,
+      password: password,
+    };
+
+    const promise = axios.post(
+      API_URL,
+      body
+    );
+
+    promise
+      .then((res) => {
+        console.log(res.data);
+        setToken(res.data.token);
+        navigate("/habitos");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } */
+
   return (
     <Home>
       <img src={logo} alt="MyWallet" />
@@ -12,15 +42,21 @@ function Login() {
         <input
           type="text"
           placeholder="E-mail"
-          required /* value={email} onChange={(e) => setEmail(e.target.value)} */
+          required
+          /* value={email} */
+          /* onChange={(e) => setEmail(e.target.value)} */
         />
         <input
           type="text"
           placeholder="Senha"
-          required /* value={password} onChange={(e) => setPassword(e.target.value)} */
+          required
+          /* value={password} */
+          /* onChange={(e) => setPassword(e.target.value)} */
         />
       </Form>
-      <div className="button" /* onClick={handleLogin} */>Entrar</div>
+      <div className="button" /* onClick={handleSignIn} */>
+        Entrar
+      </div>
       <Link to="/sign-up">
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
@@ -83,7 +119,7 @@ const Home = styled.div`
 
   p {
     margin-top: 20px;
-    
+
     font-family: "Raleway";
     font-style: normal;
     font-weight: 700;

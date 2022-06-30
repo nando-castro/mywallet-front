@@ -1,26 +1,85 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styled from 'styled-components';
-import logo from '../../assets/img/logo.png';
-import axios from 'axios';
+import styled from "styled-components";
+import logo from "../../assets/img/logo.png";
+//import axios from "axios";
 
 function Register() {
+  
+  /* const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passconfirm, setConfirm] = useState("");
 
-    return (
-        <Registe>
-            <img src={logo} alt="MyWallet" />
-            <Form>
-                <input type="text" placeholder='Nome' required /* value={name} onChange={(e) => setEmail(e.target.value)} */ />
-                <input type="text" placeholder='E-mail' required /* value={email} onChange={(e) => setPassword(e.target.value)} */ />
-                <input type="text" placeholder='Senha' required /* value={password} onChange={(e) => setName(e.target.value)} */ />
-                <input type="text" placeholder='Confirme a senha' required /* value={passconfirm} onChange={(e) => setImage(e.target.value)} */ />
-            </Form>
-            <div className="button" /* onClick={SignUp} */>Cadastrar</div>
-            <Link to="/" >
-                <p>Já tem uma conta? Faça login!</p>
-            </Link>
-        </Registe>
-    );
+  const navigate = useNavigate();
+
+  function Navigate() {
+    navigate("/");
+  }
+
+  function SignUp() {
+    const API_URL = "";
+
+    const body = {
+      name: name,
+      email: email,
+      password: password,
+      passconfirm: passconfirm,
+    };
+
+    const promise = axios.post(API_URL, body);
+
+    promise
+      .then((res) => {
+        console.log(res.data);
+        Navigate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } */
+
+  return (
+    <Registe>
+      <img src={logo} alt="MyWallet" />
+      <Form>
+        <input
+          type="text"
+          placeholder="Nome"
+          required
+          /* value={name} */
+          /* onChange={(e) => setEmail(e.target.value)} */
+        />
+        <input
+          type="text"
+          placeholder="E-mail"
+          required
+          /* value={email} */
+          /* onChange={(e) => setPassword(e.target.value)} */
+        />
+        <input
+          type="text"
+          placeholder="Senha"
+          required
+          /* value={password} */
+          /* onChange={(e) => setName(e.target.value)} */
+        />
+        <input
+          type="text"
+          placeholder="Confirme a senha"
+          required
+          /* value={passconfirm} */
+          /* onChange={(e) => setConfirm(e.target.value)} */
+        />
+      </Form>
+      <div className="button" /* onClick={SignUp} */>
+        Cadastrar
+      </div>
+      <Link to="/">
+        <p>Já tem uma conta? Faça login!</p>
+      </Link>
+    </Registe>
+  );
 }
 
 const Registe = styled.div`
