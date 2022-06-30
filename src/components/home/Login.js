@@ -5,7 +5,6 @@ import logo from "../../assets/img/logo.png";
 //import axios from "axios";
 
 function Login() {
-  
   /* const API_URL = '';
 
   const [email, setEmail] = useState("");
@@ -54,9 +53,7 @@ function Login() {
           /* onChange={(e) => setPassword(e.target.value)} */
         />
       </Form>
-      <div className="button" /* onClick={handleSignIn} */>
-        Entrar
-      </div>
+      <div className="button" /* onClick={handleSignIn} */>Entrar</div>
       <Link to="/sign-up">
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
@@ -88,7 +85,6 @@ const Home = styled.div`
     margin-bottom: 6px;
 
     background: #ffffff;
-    border-radius: 5px;
 
     font-family: "Raleway";
     font-style: normal;
@@ -97,6 +93,10 @@ const Home = styled.div`
     line-height: 23px;
 
     color: #000000;
+  }
+
+  input::placeholder {
+    padding-left: 10px;
   }
 
   .button {

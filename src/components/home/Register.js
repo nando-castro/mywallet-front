@@ -5,7 +5,6 @@ import logo from "../../assets/img/logo.png";
 //import axios from "axios";
 
 function Register() {
-  
   /* const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -72,9 +71,7 @@ function Register() {
           /* onChange={(e) => setConfirm(e.target.value)} */
         />
       </Form>
-      <div className="button" /* onClick={SignUp} */>
-        Cadastrar
-      </div>
+      <div className="button" /* onClick={SignUp} */>Cadastrar</div>
       <Link to="/">
         <p>Já tem uma conta? Faça login!</p>
       </Link>
@@ -101,8 +98,9 @@ const Registe = styled.div`
     width: 80%;
     height: 45px;
     background: #a328d6;
+
     border: 1px solid #d5d5d5;
-    border-radius: 5px;
+    
     margin-bottom: 6px;
 
     background: #ffffff;
@@ -115,6 +113,10 @@ const Registe = styled.div`
     line-height: 23px;
 
     color: #000000;
+  }
+
+  input::placeholder {
+    padding-left: 10px;
   }
 
   .button {

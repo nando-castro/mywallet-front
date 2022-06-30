@@ -27,7 +27,6 @@ const Content = styled.div`
   font-size: 20px;
   line-height: 23px;
   text-align: center;
-
   color: #868686;
 
   background: #ffffff;
