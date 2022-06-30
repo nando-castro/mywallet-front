@@ -3,6 +3,7 @@ import "../assets/css/reset.css";
 import "../assets/css/style.css";
 import Login from "./home/Login";
 import Register from "./home/Register";
+import Main from "./page/Main";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login /* setToken={setToken} */ />} />
         <Route path="/sign-up" element={<Register />} />
+        <Route path="/home" element={<Main />} />
       </Routes>
     </BrowserRouter>
   );
