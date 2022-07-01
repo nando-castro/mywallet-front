@@ -2,10 +2,91 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/img/logo.png";
-//import axios from "axios";
+import { useAuth } from '../../context/auth.js';
+import axios from "axios";
+import Button from "../button/Button";
 
-function Login() {
-  /* const API_URL = '';
+function Login({setToken}) {
+  const API_URL = "http://localhost:5000/sign-in";
+
+ /*  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const { user, setUser } = useAuth();
+
+  if (user !== null) {
+    navigate("/home");
+  }
+
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  function signin(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    const promise = axios.post(
+      API_URL,
+      { ...userLogin }
+    );
+    promise.then((response) => {
+      navigate("/home");
+      setLoading(false);
+      setUser(response.data);
+
+      const person = {
+        id: response.data.id,
+        name: response.data.name,
+        email: response.data.email,
+        image: response.data.image,
+        token: response.data.token,
+      };
+      localStorage.setItem("userLogged", JSON.stringify(person));
+    });
+    promise.catch((err) => {
+      setLoading(false);
+      //toast.error("Email ou senha inválidos!");
+    });
+  }
+
+  function ChangeInput(e) {
+    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
+  }
+
+  return (
+    <Container>
+      <img src={logo} alt="MyWallet" />
+
+      <Form>
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={userLogin.email}
+          name="email"
+          onChange={ChangeInput}
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          value={userLogin.password}
+          name="password"
+          onChange={ChangeInput}
+        />
+
+        {loading === false ? (
+          <Button type={"submit"} text={"Entrar"} destiny={""} action={signin} />
+        ) : (
+          'carregando'
+          //<Loader />
+        )}
+      </Form>
+      <Link to="/sign-up">
+        <p>Primeira vez? Cadastre-se!</p>
+      </Link>
+      <ToastContainer limit={1} />
+    </Container>
+  ); */
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,50 +99,49 @@ function Login() {
       password: password,
     };
 
-    const promise = axios.post(
-      API_URL,
-      body
-    );
+    const promise = axios.post(API_URL, body);
 
     promise
       .then((res) => {
         console.log(res.data);
         setToken(res.data.token);
-        navigate("/habitos");
+        navigate("/home");
       })
       .catch((err) => {
         console.log(err);
       });
-  } */
+  }
 
   return (
-    <Home>
+    <Container>
       <img src={logo} alt="MyWallet" />
       <Form>
         <input
           type="text"
           placeholder="E-mail"
           required
-          /* value={email} */
-          /* onChange={(e) => setEmail(e.target.value)} */
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="text"
           placeholder="Senha"
           required
-          /* value={password} */
-          /* onChange={(e) => setPassword(e.target.value)} */
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </Form>
-      <div className="button" /* onClick={handleSignIn} */>Entrar</div>
+      <div className="button" onClick={handleSignIn}>
+        Entrar
+      </div>
       <Link to="/sign-up">
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
-    </Home>
+    </Container>
   );
 }
 
-const Home = styled.div`
+const Container = styled.div`
   width: 100%;
   height: 100vh;
   display: flex;

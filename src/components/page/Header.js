@@ -1,10 +1,24 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/auth.js';
 
 function Header() {
+  const navigate = useNavigate();
+
+  const { user, setNavbar } = useAuth();
+
+  function exitApp() {
+    setNavbar(false);
+    navigate("/");
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <Heade>
-      <h1>Olá, fulano</h1>
-      <ion-icon name="exit-outline"></ion-icon>
+      <h1>Olá, {user.name}</h1>
+      <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
     </Heade>
   );
 }
