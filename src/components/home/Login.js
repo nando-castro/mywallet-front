@@ -1,99 +1,19 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../assets/img/logo.png";
-import { useAuth } from '../../context/auth.js';
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 import Button from "../button/Button";
+import logo from "../../assets/img/logo.png";
 
-function Login({setToken}) {
+function Login({ setToken }) {
   const API_URL = "http://localhost:5000/sign-in";
-
- /*  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const { user, setUser } = useAuth();
-
-  if (user !== null) {
-    navigate("/home");
-  }
-
-  const [userLogin, setUserLogin] = useState({
-    email: "",
-    password: "",
-  });
-
-  function signin(e) {
-    e.preventDefault();
-    setLoading(true);
-
-    const promise = axios.post(
-      API_URL,
-      { ...userLogin }
-    );
-    promise.then((response) => {
-      navigate("/home");
-      setLoading(false);
-      setUser(response.data);
-
-      const person = {
-        id: response.data.id,
-        name: response.data.name,
-        email: response.data.email,
-        image: response.data.image,
-        token: response.data.token,
-      };
-      localStorage.setItem("userLogged", JSON.stringify(person));
-    });
-    promise.catch((err) => {
-      setLoading(false);
-      //toast.error("Email ou senha inválidos!");
-    });
-  }
-
-  function ChangeInput(e) {
-    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
-  }
-
-  return (
-    <Container>
-      <img src={logo} alt="MyWallet" />
-
-      <Form>
-        <input
-          type="email"
-          placeholder="E-mail"
-          value={userLogin.email}
-          name="email"
-          onChange={ChangeInput}
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={userLogin.password}
-          name="password"
-          onChange={ChangeInput}
-        />
-
-        {loading === false ? (
-          <Button type={"submit"} text={"Entrar"} destiny={""} action={signin} />
-        ) : (
-          'carregando'
-          //<Loader />
-        )}
-      </Form>
-      <Link to="/sign-up">
-        <p>Primeira vez? Cadastre-se!</p>
-      </Link>
-      <ToastContainer limit={1} />
-    </Container>
-  ); */
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  function handleSignIn() {
+  function signin() {
     const body = {
       email: email,
       password: password,
@@ -131,7 +51,7 @@ function Login({setToken}) {
           onChange={(e) => setPassword(e.target.value)}
         />
       </Form>
-      <div className="button" onClick={handleSignIn}>
+      <div className="button" onClick={signin}>
         Entrar
       </div>
       <Link to="/sign-up">

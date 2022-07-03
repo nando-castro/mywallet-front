@@ -1,91 +1,76 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../assets/img/logo.png";
 import axios from "axios";
 import Button from "../button/Button";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../assets/img/logo.png";
 
 function Register() {
+  const API_URL = "http://localhost:5000/sign-up";
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passconfirm, setConfirm] = useState("");
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
-  const [userRegister, setUserRegister] = useState({
-    name: "",
-    email: "",
-    password: "",
-    passconfirm: "",
-  });
-
-  function signup(e) {
-    e.preventDefault();
-    setLoading(true);
-
-    const API_URL = "http://localhost:5000/sign-up";
-
-    const promise = axios.post(API_URL, { ...userRegister });
-    promise.then((res) => {
-      console.log(res.data);
-      navigate("/");
-      setLoading(false);
-    });
-    promise.catch((err) => {
-      console.log(err);
-      setLoading(false);
-      //toast.error("E-mail ou senha inválidos!");
-    });
+  function Navigate() {
+    navigate("/");
   }
 
-  function ChangeInput(e) {
-    setUserRegister({ ...userRegister, [e.target.name]: e.target.value });
+  function signup() {
+    const body = {
+      name: name,
+      email: email,
+      password: password,
+      passconfirm: passconfirm,
+    };
+    const promise = axios.post(API_URL, body);
+    promise
+      .then((res) => {
+        console.log(res.data);
+        Navigate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
     <Container>
       <img src={logo} alt="MyWallet" />
-
       <Form>
         <input
           type="text"
           placeholder="Nome"
-          value={userRegister.name}
-          name="name"
-          onChange={ChangeInput}
+          required
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
-          type="email"
+          type="text"
           placeholder="E-mail"
-          value={userRegister.email}
-          name="email"
-          onChange={ChangeInput}
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="text"
           placeholder="Senha"
-          value={userRegister.password}
-          name="password"
-          onChange={ChangeInput}
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="text"
           placeholder="Confirme a senha"
-          value={userRegister.passconfirm}
-          name="passconfirm"
-          onChange={ChangeInput}
+          required
+          value={passconfirm}
+          onChange={(e) => setConfirm(e.target.value)}
         />
-
-        {loading === false ? (
-          <Button
-            type={"submit"}
-            text={"Cadastrar"}
-            destiny={""}
-            action={signup}
-          />
-        ) : (
-          "carregando"
-          //<Loader />
-        )}
       </Form>
-
+      <div className="button" onClick={signup}>
+        Cadastrar
+      </div>
       <Link to="/">
         <p>Já tem uma conta? Faça login!</p>
       </Link>

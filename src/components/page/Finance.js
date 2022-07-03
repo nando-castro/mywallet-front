@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Control() {
+function Finance() {
   return (
     <>
       <Content>
@@ -38,4 +38,4 @@ const Content = styled.div`
   }
 `;
 
-export default Control;
+export default Finance;

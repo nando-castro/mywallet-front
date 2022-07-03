@@ -10,11 +10,9 @@ import Login from "./home/Login";
 import Register from "./home/Register";
 import Main from "./page/Main";
 
-
 function App() {
+  const [token, setToken] = useState("");
 
-  const [token, setToken] = useState('');
-  
   return (
     <BrowserRouter>
       <Routes>

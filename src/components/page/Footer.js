@@ -1,14 +1,25 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
+  const navigate = useNavigate();
+
+  function addFinance() {
+    navigate("/add");
+  }
+
+  function removeFinance() {
+    navigate("/remove");
+  }
+
   return (
     <>
       <Baseboard>
-        <div>
+        <div onClick={addFinance}>
           <ion-icon name="add-circle-outline"></ion-icon>
           <p>Nova Entrada</p>
         </div>
-        <div>
+        <div onClick={removeFinance}>
           <ion-icon name="remove-circle-outline"></ion-icon>
           <p>Nova Saída</p>
         </div>

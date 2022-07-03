@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Control from "./Control";
+import Finance from "./Finance";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -8,7 +8,7 @@ function Main() {
     <>
       <Home>
         <Header />
-        <Control />
+        <Finance />
         <Footer />
       </Home>
     </>
