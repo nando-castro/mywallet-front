@@ -7,6 +7,7 @@ export const AuthProvider = (props) => {
     const [token, setToken] = useState("");
     const [saldo, setSaldo] = useState('');
     const [transation, setTransation] = useState('')
+    const [entrada, setEntrada] = useState('')
 
     useEffect(() => {
         if (localStorage.getItem('userLogged')) {

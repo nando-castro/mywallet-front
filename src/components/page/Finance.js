@@ -1,32 +1,44 @@
 import styled from "styled-components";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
+import { useEffect } from "react";
 
 function Finance() {
+  const { user, setEntrada } = useAuth();
+
   const API_URL = "http://localhost:5000/finances";
+  /* function handleFinances() {
 
-  const { user } = useAuth();
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+    const promise = axios.get(API_URL, config);
 
-  const body = {
-    value: "1",
-    description: " text",
-  };
+    promise
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } */
 
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
-  };
+/*   useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
 
-  const promise = axios.get(API_URL, body, config);
-
-  promise
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    axios
+      .get(API_URL, config)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []); */
 
   return (
     <>

@@ -12,6 +12,7 @@ function Post() {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
+  
 
   const navigate = useNavigate();
 
@@ -20,9 +21,6 @@ function Post() {
       value: value,
       description: text,
       type: "add",
-      /* saldo: {
-        $push: value
-      } */
     };
 
     const config = {
@@ -35,24 +33,15 @@ function Post() {
 
     promise
       .then((res) => {
+        setLoading(true);
         navigate("/home");
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       });
 
-    /* const config = { headers: { Authorization: `Bearer ${user.token}` } };
-     */
-    //const promise = axios.post(API_URL, config, body);
-
-    /* promise
-      .then((res) => {
-        navigate("/home");
-      })
-      .catch((err) => {
-        console.log(err);
-      }); */
   }
   return (
     <>

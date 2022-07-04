@@ -30,6 +30,7 @@ function Login() {
     });
     promise.then((response) => {
       setUser(response.data);
+      console.log(response.data)
       setLoading(true);
       navigate("/home");
 
@@ -56,6 +57,7 @@ function Login() {
       <Form>
         <input
           type="email"
+          disabled={loading ? true : false}
           placeholder="E-mail"
           value={userLogin.email}
           name="email"
@@ -63,6 +65,7 @@ function Login() {
         />
         <input
           type="password"
+          disabled={loading ? true : false}
           placeholder="Senha"
           value={userLogin.password}
           name="password"
