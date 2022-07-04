@@ -9,7 +9,7 @@ function Footer() {
   }
 
   function removeFinance() {
-    navigate("/remove");
+    navigate("/exit");
   }
 
   return (

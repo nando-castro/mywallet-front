@@ -9,20 +9,21 @@ import PutPost from "./control/PutPost";
 import Login from "./home/Login";
 import Register from "./home/Register";
 import Main from "./page/Main";
+import dadosUser from "../context/auth";
 
 function App() {
-  const [token, setToken] = useState("");
+  //const [token, setToken] = useState("");
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login setToken={setToken} />} />
+        <Route path="/" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/home" element={<Main />} />
         <Route path="/add" element={<Post />} />
-        <Route path="/remove" element={<Exit />} />
-        <Route path="/atualiza-entrada" element={<PutPost />} />
-        <Route path="/atualiza-saida" element={<PutExit />} />
+        <Route path="/exit" element={<Exit />} />
+        <Route path="/put-add" element={<PutPost />} />
+        <Route path="/put-exit" element={<PutExit />} />
       </Routes>
     </BrowserRouter>
   );

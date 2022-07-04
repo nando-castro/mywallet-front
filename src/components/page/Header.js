@@ -1,18 +1,23 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth";
+import axios from "axios";
 
 function Header() {
   const navigate = useNavigate();
+  const { token, user, setToken } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   function exitApp() {
     navigate("/");
+    localStorage.clear();
     window.location.reload();
   }
 
   return (
     <Container>
-      <h1>Olá, fulano</h1>
+      <Top>{user && <p>Olá, {user.email}</p>}</Top>
       <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
     </Container>
   );
@@ -42,5 +47,7 @@ const Container = styled.header`
   }
 
 `;
+
+const Top = styled.div``;
 
 export default Header;

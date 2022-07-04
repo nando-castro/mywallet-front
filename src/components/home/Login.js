@@ -4,56 +4,79 @@ import { useState } from "react";
 import axios from "axios";
 import Button from "../button/Button";
 import logo from "../../assets/img/logo.png";
+import { useAuth } from "../../context/auth";
 
-function Login({ setToken }) {
-  const API_URL = "http://localhost:5000/sign-in";
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+function Login() {
   const navigate = useNavigate();
 
-  function signin() {
-    const body = {
-      email: email,
-      password: password,
-    };
+  const { user, setUser, setToken } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-    const promise = axios.post(API_URL, body);
+  if (user !== null) {
+    navigate("/home");
+  }
 
-    promise
-      .then((res) => {
-        console.log(res.data);
-        setToken(res.data.token);
-        navigate("/home");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  function login(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    const promise = axios.post("http://localhost:5000/sign-in", {
+      ...userLogin,
+    });
+    promise.then((response) => {
+      setUser(response.data);
+      setLoading(true);
+      navigate("/home");
+
+      const person = {
+        email: response.data.email,
+        token: response.data.token,
+      };
+      localStorage.setItem("userLogged", JSON.stringify(person));
+    });
+
+    promise.catch((err) => {
+      setLoading(false);
+    });
+  }
+
+  function ChangeInput(e) {
+    setUserLogin({ ...userLogin, [e.target.name]: e.target.value });
   }
 
   return (
     <Container>
-      <img src={logo} alt="MyWallet" />
+      <img src={logo} alt="Logo App" />
+
       <Form>
         <input
-          type="text"
+          type="email"
           placeholder="E-mail"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={userLogin.email}
+          name="email"
+          onChange={ChangeInput}
         />
         <input
-          type="text"
+          type="password"
           placeholder="Senha"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={userLogin.password}
+          name="password"
+          onChange={ChangeInput}
         />
+
+        {loading === false ? (
+          <Button type={"submit"} text={"Entrar"} destiny={""} action={login} />
+        ) : (
+          "carregando"
+          //<Loader />
+        )}
       </Form>
-      <div className="button" onClick={signin}>
-        Entrar
-      </div>
+
       <Link to="/sign-up">
         <p>Primeira vez? Cadastre-se!</p>
       </Link>

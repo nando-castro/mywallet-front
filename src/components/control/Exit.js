@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 function Exit() {
   const API_URL = "http://localhost:5000/finances";
-  let typeFinance = "remove";
 
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
@@ -16,7 +15,7 @@ function Exit() {
     const body = {
       value: value,
       description: text,
-      type: typeFinance,
+      type: "exit",
     };
 
     const promise = axios.post(API_URL, body);

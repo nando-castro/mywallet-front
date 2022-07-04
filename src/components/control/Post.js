@@ -2,11 +2,14 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "../../context/auth";
 
 function Post() {
   const API_URL = "http://localhost:5000/finances";
-  let typeFinance = "add";
 
+  const { user, setTransation } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
 
@@ -16,19 +19,40 @@ function Post() {
     const body = {
       value: value,
       description: text,
-      type: typeFinance,
+      type: "add",
+      /* saldo: {
+        $push: value
+      } */
     };
 
-    const promise = axios.post(API_URL, body);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const promise = axios.post(API_URL, body ,config);
 
     promise
       .then((res) => {
-        console.log(res.data);
         navigate("/home");
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+
+    /* const config = { headers: { Authorization: `Bearer ${user.token}` } };
+     */
+    //const promise = axios.post(API_URL, config, body);
+
+    /* promise
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      }); */
   }
   return (
     <>

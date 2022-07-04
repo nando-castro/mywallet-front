@@ -4,8 +4,9 @@ export const AuthContext = React.createContext({});
 
 export const AuthProvider = (props) => {
     const [user, setUser] = useState(null);
-    const [progress, setProgress] = useState(null);
-    const [navbar, setNavbar] = useState(false);
+    const [token, setToken] = useState("");
+    const [saldo, setSaldo] = useState('');
+    const [transation, setTransation] = useState('')
 
     useEffect(() => {
         if (localStorage.getItem('userLogged')) {
@@ -16,10 +17,16 @@ export const AuthProvider = (props) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ user, setUser, progress, setProgress, navbar, setNavbar }}>
+        <AuthContext.Provider value={{ user, setUser, token, setToken, setTransation }}>
             {props.children}
         </AuthContext.Provider>
     )
 }
 
 export const useAuth = () => React.useContext(AuthContext);
+
+/* import { createContext } from "react";
+
+const dadosUser = createContext();
+
+export default dadosUser; */
