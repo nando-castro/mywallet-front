@@ -7,24 +7,6 @@ function Finance() {
   const { user, setEntrada } = useAuth();
 
   const API_URL = "http://localhost:5000/finances";
-  /* function handleFinances() {
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-      },
-    };
-    const promise = axios.get(API_URL, config);
-
-    promise
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } */
-
 /*   useEffect(() => {
     const config = {
       headers: {
