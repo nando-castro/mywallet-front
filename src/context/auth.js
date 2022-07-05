@@ -5,6 +5,7 @@ export const AuthContext = React.createContext({});
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [saldo, setSaldo] = useState(0);
+  const [transation, setTransation] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("userLogged")) {
@@ -16,7 +17,7 @@ export const AuthProvider = (props) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, saldo, setSaldo }}
+      value={{ user, setUser, transation, setTransation, saldo, setSaldo }}
     >
       {props.children}
     </AuthContext.Provider>

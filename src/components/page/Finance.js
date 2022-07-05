@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import { useEffect } from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Finance() {
-  const { user, saldo, setSaldo } = useAuth();
-  const [transation, setTransation] = useState([]);
+  const { user, transation, setTransation,saldo } = useAuth();
+  
+
+  const navigate = useNavigate();
 
   const API_URL = "http://localhost:5000/finances";
 
@@ -20,7 +22,6 @@ function Finance() {
         });
         promise
           .then((res) => {
-            console.log(res.data);
             setTransation(res.data);
           })
           .catch((err) => {
@@ -31,9 +32,17 @@ function Finance() {
     }
   }, []);
 
+  function editValues() {
+    if (transation.type === "add") {
+      navigate("/put-add");
+    } else {
+      navigate("/put-exit");
+    }
+  }
+
   function renderFinances() {
     return transation.map((i, index) => (
-      <Li key={index}>
+      <Li key={index} onClick={editValues}>
         <Data>{i.time}</Data>
         <Text>{i.description}</Text>
         <Value
@@ -47,7 +56,7 @@ function Finance() {
 
   return (
     <>
-      {transation.length !== 0 ? (
+      {user && transation.length !== 0 ? (
         <Content>
           <Div>
             <p>{renderFinances()}</p>

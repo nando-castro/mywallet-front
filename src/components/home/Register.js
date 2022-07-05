@@ -30,7 +30,6 @@ function Register() {
     promise.catch((err) => {
       console.log(err);
       setLoading(false);
-      //toast.error("E-mail ou senha inválidos!");
     });
   }
 

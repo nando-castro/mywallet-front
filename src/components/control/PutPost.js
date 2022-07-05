@@ -1,6 +1,42 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "../../context/auth";
 
 function PutPost() {
+  const { user, transation, setTransation } = useAuth();
+  const [value, setValue] = useState("");
+  const [text, setText] = useState("");
+
+  const navigate = useNavigate();
+
+  const API_URL = `http://localhost:5000/finances`;
+
+  function handleAdd() {
+    const body = {
+      value: parseFloat(value),
+      description: text,
+      type: "add",
+    };
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const promise = axios.post(API_URL, body, config);
+
+    promise
+      .then((res) => {
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
   return (
     <>
       <Poster>
@@ -10,17 +46,19 @@ function PutPost() {
             type="text"
             placeholder="Valor"
             required
-            /* value={email} */
-            /* onChange={(e) => setEmail(e.target.value)} */
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
           />
           <input
             type="text"
             placeholder="Descrição"
             required
-            /* value={password} */
-            /* onChange={(e) => setPassword(e.target.value)} */
+            value={text}
+            onChange={(e) => setText(e.target.value)}
           />
-          <div className="button" /* onClick={handleSignIn} */>Atualizar entrada</div>
+          <div className="button" onClick={handleAdd}>
+            Atualizar entrada
+          </div>
         </Form>
       </Poster>
     </>
@@ -52,7 +90,7 @@ const Poster = styled.div`
   input {
     width: 326px;
     height: 58px;
-    
+
     background: #a328d6;
     border: 1px solid #d5d5d5;
     margin-bottom: 6px;
@@ -71,8 +109,8 @@ const Poster = styled.div`
     margin-top: 10px;
   }
 
-  input::placeholder{
-      padding-left: 10px;
+  input::placeholder {
+    padding-left: 10px;
   }
 
   .button {

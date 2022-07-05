@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
-import axios from "axios";
 
 function Header() {
   const navigate = useNavigate();
