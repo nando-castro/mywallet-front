@@ -9,10 +9,8 @@ import PutPost from "./control/PutPost";
 import Login from "./home/Login";
 import Register from "./home/Register";
 import Main from "./page/Main";
-import dadosUser from "../context/auth";
 
 function App() {
-  //const [token, setToken] = useState("");
 
   return (
     <BrowserRouter>

@@ -6,22 +6,13 @@ export default function Loader() {
         {
             Component: ThreeDots,
             props: {
-                color: "#52B6FF",
+                color: "#8c11be",
                 height: 100,
                 width: 110,
                 radius: 40
             },
             name: "ThreeDots"
-        },
-        {
-            Component: TailSpin,
-            props: {
-              color: "#0ead69",
-              height: 100,
-              width: 110
-            },
-            name: "TailSpin"
-          }
+        }
     ];
     return (
         <div className="row">

@@ -2,10 +2,12 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/auth";
 
 function Exit() {
   const API_URL = "http://localhost:5000/finances";
 
+  const { user } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
 
@@ -13,12 +15,18 @@ function Exit() {
 
   function handleRemove() {
     const body = {
-      value: value,
+      value: parseFloat(value),
       description: text,
       type: "exit",
     };
 
-    const promise = axios.post(API_URL, body);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const promise = axios.post(API_URL, body, config);
 
     promise
       .then((res) => {

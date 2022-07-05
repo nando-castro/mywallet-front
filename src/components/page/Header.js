@@ -17,7 +17,7 @@ function Header() {
 
   return (
     <Container>
-      <Top>{user && <p>Olá, {user.email}</p>}</Top>
+      <Top>{user && <p>Olá, {user.name}</p>}</Top>
       <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
     </Container>
   );

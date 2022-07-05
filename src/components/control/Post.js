@@ -8,17 +8,16 @@ import { useAuth } from "../../context/auth";
 function Post() {
   const API_URL = "http://localhost:5000/finances";
 
-  const { user, setTransation } = useAuth();
+  const { user, setSaldo } = useAuth();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
-  
 
   const navigate = useNavigate();
 
   function handleAdd() {
     const body = {
-      value: value,
+      value: parseFloat(value),
       description: text,
       type: "add",
     };
@@ -36,6 +35,7 @@ function Post() {
         setLoading(true);
         navigate("/home");
         console.log(res);
+        setSaldo(value.push())
       })
       .catch((err) => {
         console.log(err);
