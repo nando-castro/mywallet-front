@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
 import { useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Finance() {
-  const { user, transation, setTransation,saldo } = useAuth();
-  
+  const { user, saldo } = useAuth();
+  const [transation, setTransation] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ function Finance() {
         });
         promise
           .then((res) => {
+            console.log(res.data);
             setTransation(res.data);
           })
           .catch((err) => {

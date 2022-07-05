@@ -2,11 +2,10 @@ import styled from "styled-components";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { useAuth } from "../../context/auth";
 
 function PutPost() {
-  const { user, transation, setTransation } = useAuth();
+  const { user } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
 

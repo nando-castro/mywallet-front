@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 function Header() {
   const navigate = useNavigate();
-  const { token, user, setToken } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
   function exitApp() {
     navigate("/");
