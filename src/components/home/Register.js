@@ -4,6 +4,7 @@ import Button from "../button/Button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
+import Loader from "../loading/Loader";
 
 function Register() {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ function Register() {
             action={register}
           />
         ) : (
-          "carregando"
+          <Loader />
         )}
       </Form>
 

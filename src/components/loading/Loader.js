@@ -5,7 +5,7 @@ export default function Loader() {
     {
       Component: ThreeDots,
       props: {
-        color: "#8c11be",
+        color: "#FFFFFF",
         height: 100,
         width: 110,
         radius: 40,

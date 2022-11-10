@@ -5,6 +5,7 @@ import axios from "axios";
 import Button from "../button/Button";
 import logo from "../../assets/img/logo.png";
 import { useAuth } from "../../context/auth";
+import Loader from "../loading/Loader";
 
 function Login() {
   const navigate = useNavigate();
@@ -29,15 +30,16 @@ function Login() {
       ...userLogin,
     });
     promise.then((response) => {
+      console.log(response.data);
       setUser(response.data);
       setLoading(true);
       navigate("/home");
-      
+
       const person = {
         name: response.data.name,
         email: response.data.email,
         token: response.data.token,
-        saldo: response.data.saldo
+        saldo: response.data.saldo,
       };
       localStorage.setItem("userLogged", JSON.stringify(person));
     });
@@ -52,7 +54,6 @@ function Login() {
   }
 
   return (
-    
     <Container>
       <img src={logo} alt="Logo App" />
 
@@ -77,8 +78,7 @@ function Login() {
         {loading === false ? (
           <Button type={"submit"} text={"Entrar"} destiny={""} action={login} />
         ) : (
-          "carregando"
-          //<Loader />
+          <Loader />
         )}
       </Form>
 
@@ -86,7 +86,6 @@ function Login() {
         <p>Primeira vez? Cadastre-se!</p>
       </Link>
     </Container>
-    
   );
 }
 
@@ -130,7 +129,7 @@ const Container = styled.div`
 
   .button {
     width: 80%;
-    heigth: 45px;
+    height: 45px;
     padding: 10px;
     text-align: center;
 
