@@ -15,18 +15,10 @@ export const AuthProvider = (props) => {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ user, setUser, saldo, setSaldo }}
-    >
+    <AuthContext.Provider value={{ user, setUser, saldo, setSaldo }}>
       {props.children}
     </AuthContext.Provider>
   );
 };
 
 export const useAuth = () => React.useContext(AuthContext);
-
-/* import { createContext } from "react";
-
-const dadosUser = createContext();
-
-export default dadosUser; */

@@ -13,7 +13,7 @@ function Button({ text, type, destiny, action, loading }) {
 
 const Container = styled.button`
   width: 45vh;
-  heigth: 45px;
+  height: 45px;
   padding: 10px;
   text-align: center;
 

@@ -29,30 +29,30 @@ function Footer() {
 }
 
 const Baseboard = styled.footer`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position fixed;
-    bottom: 0;
-    left: 0;
-    padding: 20px 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20px 20px;
 
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 20px;
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
 
-    color: #FFFFFF;
+  color: #ffffff;
 
   div {
     width: 155px;
     height: 114px;
-    background: #A328D6;
+    background: #a328d6;
     border-radius: 5px;
-    border: 1px solid #FFFFFF;
-    padding 10px
+    border: 1px solid #ffffff;
+    padding: 10px;
   }
 
   ion-icon {
@@ -60,12 +60,11 @@ const Baseboard = styled.footer`
     height: 25px;
 
     font-weight: 700;
-   }
+  }
 
-   p {
-       margin-top: 10px;
-   }
-
+  p {
+    margin-top: 10px;
+  }
 `;
 
 export default Footer;
