@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <Container>
-      <Top>{user && <p>Olá, {user.name}</p>}</Top>
+      <div>{user && <p>Olá, {user.name}</p>}</div>
       <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
     </Container>
   );
@@ -31,7 +31,6 @@ const Container = styled.header`
   left: 0;
   padding: 20px 20px;
 
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 26px;
@@ -43,7 +42,5 @@ const Container = styled.header`
     font-size: 26px;
   }
 `;
-
-const Top = styled.div``;
 
 export default Header;

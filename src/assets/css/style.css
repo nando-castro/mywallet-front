@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;500;600;700;800;900&family=Saira+Stencil+One&display=swap');
 
 body {
-    font-family: 'Roboto', sans-serif;
-    /* font-family: 'Raleway', sans-serif; */
-    /* font-family: 'Saira Stencil One', cursive; */
+    font-family: "Raleway";
     background: #F2F2F2;
 }
 
