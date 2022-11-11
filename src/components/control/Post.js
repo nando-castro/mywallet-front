@@ -3,10 +3,9 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { api } from "../../services/api";
 
 function Post() {
-  const API_URL = "http://localhost:5000/finances";
-
   const { user, setSaldo } = useAuth();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
@@ -14,7 +13,8 @@ function Post() {
 
   const navigate = useNavigate();
 
-  function handleAdd() {
+  function handleAdd(e) {
+    e.preventDefault();
     const body = {
       value: parseFloat(value),
       description: text,
@@ -27,20 +27,17 @@ function Post() {
       },
     };
 
-    const promise = axios.post(API_URL, body ,config);
-
-    promise
+    api
+      .post("finances", { ...body }, config)
       .then((res) => {
         setLoading(true);
         navigate("/home");
-        console.log(res);
-        setSaldo(value.push())
+        setSaldo(value.push());
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false)
+        setLoading(false);
       });
-
   }
   return (
     <>

@@ -16,7 +16,7 @@ export default function Loader() {
   return (
     <div className="row">
       {data.map((loader, index) => (
-        <div>
+        <div key={index}>
           <div
             data-tip={loader.name}
             data-for="happyFace"

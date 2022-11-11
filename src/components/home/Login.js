@@ -30,7 +30,6 @@ function Login() {
       ...userLogin,
     });
     promise.then((response) => {
-      console.log(response.data);
       setUser(response.data);
       setLoading(true);
       navigate("/home");

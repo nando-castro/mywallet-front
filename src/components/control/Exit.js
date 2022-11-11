@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { api } from "../../services/api";
 
 function Exit() {
-  const API_URL = "http://localhost:5000/finances";
-
   const { user } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
@@ -26,9 +24,8 @@ function Exit() {
       },
     };
 
-    const promise = axios.post(API_URL, body, config);
-
-    promise
+    api
+      .post("finances", { ...body }, config)
       .then((res) => {
         console.log(res.data);
         navigate("/home");

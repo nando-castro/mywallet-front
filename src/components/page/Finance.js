@@ -1,41 +1,56 @@
 import styled from "styled-components";
 import { useAuth } from "../../context/auth";
-import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 function Finance() {
-  const { user, saldo } = useAuth();
-  const [transation, setTransation] = useState([]);
+  const { user } = useAuth();
+  const [transations, setTransations] = useState([]);
 
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5000/finances";
+  const CONFIG = {
+    headers: {
+      Authorization: `Bearer ${user.token}`,
+    },
+  };
 
   useEffect(() => {
-    if (user) {
-      function getTransation() {
-        const promise = axios.get(API_URL, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
+    async function getTransations() {
+      await api
+        .get("finances", CONFIG)
+        .then((res) => {
+          console.log(res.data);
+          setTransations(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        promise
-          .then((res) => {
-            console.log(res.data);
-            setTransation(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-      getTransation();
     }
+    getTransations();
+    // eslint-disable-next-line
   }, []);
 
+  function getBalance() {
+    if (transations.length > 0) {
+      return transations.reduce((previous, current) => {
+        if (current.type === "add") {
+          return previous + current.value;
+        }
+
+        return previous - current.value;
+      }, 0);
+    } else {
+      return 0;
+    }
+  }
+
+  const balance = getBalance();
+
   function editValues() {
-    if (transation.type === "add") {
+    if (transations.type === "add") {
       navigate("/put-add");
     } else {
       navigate("/put-exit");
@@ -43,29 +58,31 @@ function Finance() {
   }
 
   function renderFinances() {
-    return transation.map((i, index) => (
-      <Li key={index} onClick={editValues}>
-        <Data>{i.time}</Data>
-        <Text>{i.description}</Text>
-        <Value
-          style={i.type === "exit" ? { color: "red" } : { color: "green" }}
-        >
-          {i.value}
-        </Value>
-      </Li>
+    return transations.map((i) => (
+      <Div key={i.id}>
+        <Li key={i.id} onClick={editValues}>
+          <Date>{i.time}</Date>
+          <Text>{i.description}</Text>
+          <Value
+            style={
+              i.type === "exit" ? { color: "#C70000" } : { color: "#03AC00" }
+            }
+          >
+            {i.value}
+          </Value>
+        </Li>
+      </Div>
     ));
   }
 
   return (
     <>
-      {user && transation.length !== 0 ? (
+      {user ? (
         <Content>
-          <Div>
-            <p>{renderFinances()}</p>
-          </Div>
+          {renderFinances()}
           <Saldo>
             <p>Saldo: </p>
-            <p className="value">{saldo}</p>
+            <p className="value">{balance}</p>
           </Saldo>
         </Content>
       ) : (
@@ -84,8 +101,6 @@ const Content = styled.div`
   margin-top: -40px;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
 
   font-family: "Raleway";
@@ -108,22 +123,17 @@ const Content = styled.div`
 const Div = styled.div`
   overflow-y: scroll;
   width: 100%;
-  height: 100%;
-  display: flex;
+  height: 80%;
 
-  p {
-    width: 100%;
-    margin: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
+  background-color: aliceblue;
 `;
 
 const Li = styled.div`
   width: 100%;
   height: 40px;
   display: flex;
+
+  border: 1px solid #000;
 `;
 
 const Text = styled.p`
@@ -138,7 +148,7 @@ const Text = styled.p`
   color: #000000;
 `;
 
-const Data = styled.p`
+const Date = styled.p`
   width: 100%;
 
   font-family: "Raleway";
