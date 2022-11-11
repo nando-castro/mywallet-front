@@ -14,8 +14,10 @@ function Header() {
 
   return (
     <Container>
-      <div>{user && <p>Olá, {user.name}</p>}</div>
-      <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
+      <Content>
+        <div>{user && <p>Olá, {user.name}</p>}</div>
+        <ion-icon name="exit-outline" onClick={exitApp}></ion-icon>
+      </Content>
     </Container>
   );
 }
@@ -25,7 +27,7 @@ const Container = styled.header`
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
@@ -41,6 +43,15 @@ const Container = styled.header`
     font-weight: bold;
     font-size: 26px;
   }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default Header;

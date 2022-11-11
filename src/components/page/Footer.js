@@ -15,14 +15,16 @@ function Footer() {
   return (
     <>
       <Baseboard>
-        <div onClick={addFinance}>
-          <ion-icon name="add-circle-outline"></ion-icon>
-          <p>Nova Entrada</p>
-        </div>
-        <div onClick={removeFinance}>
-          <ion-icon name="remove-circle-outline"></ion-icon>
-          <p>Nova Saída</p>
-        </div>
+        <Content>
+          <div onClick={addFinance}>
+            <ion-icon name="add-circle-outline"></ion-icon>
+            <p>Nova Entrada</p>
+          </div>
+          <div onClick={removeFinance}>
+            <ion-icon name="remove-circle-outline"></ion-icon>
+            <p>Nova Saída</p>
+          </div>
+        </Content>
       </Baseboard>
     </>
   );
@@ -45,15 +47,6 @@ const Baseboard = styled.footer`
 
   color: #ffffff;
 
-  div {
-    width: 155px;
-    height: 114px;
-    background: #a328d6;
-    border-radius: 5px;
-    border: 1px solid #ffffff;
-    padding: 10px;
-  }
-
   ion-icon {
     width: 25px;
     height: 25px;
@@ -63,6 +56,24 @@ const Baseboard = styled.footer`
 
   p {
     margin-top: 10px;
+  }
+`;
+
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  div {
+    width: 155px;
+    height: 114px;
+    background: #a328d6;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    padding: 10px;
   }
 `;
 
