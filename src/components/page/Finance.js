@@ -74,7 +74,7 @@ function Finance() {
 
   return (
     <>
-      {user ? (
+      {user && transations.length > 0 ? (
         <Container>
           <Content>{renderFinances()}</Content>
           <BalanceContent>
@@ -83,9 +83,11 @@ function Finance() {
           </BalanceContent>
         </Container>
       ) : (
-        <Content>
-          <p>Não há registros de entrada ou saída</p>
-        </Content>
+        <Container>
+          <WarningBalance>
+            <p>Não há registros de entrada ou saída</p>
+          </WarningBalance>
+        </Container>
       )}
     </>
   );
@@ -132,6 +134,21 @@ const Content = styled.div`
   border-radius: 5px 5px 0 0;
 `;
 
+const WarningBalance = styled.div`
+  width: 90%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  color: #868686;
+
+  background: #ffffff;
+  border-radius: 5px;
+`;
+
 const BalanceContent = styled.div`
   width: 90%;
   height: 10%;
@@ -155,6 +172,8 @@ const BalanceContent = styled.div`
   }
 
   background-color: #ffffff;
+
+  cursor: default;
 `;
 
 const Li = styled.div`
@@ -170,6 +189,8 @@ const Li = styled.div`
   padding: 10px 5px 0 5px;
 
   color: #000000;
+
+  cursor: pointer;
 `;
 
 const Date = styled.p`
