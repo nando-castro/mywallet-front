@@ -77,7 +77,7 @@ function Finance() {
       {user && transations.length > 0 ? (
         <Container>
           <Content>{renderFinances()}</Content>
-          <BalanceContent>
+          <BalanceContent color={balance > 0 ? "#03AC00" : "#C70000"}>
             <p>SALDO</p>
             {balance}
           </BalanceContent>
@@ -161,12 +161,15 @@ const BalanceContent = styled.div`
   text-align: right;
 
   border-radius: 0 0 5px 5px;
+  color: ${(props) => props.color};
 
   p {
     width: 70%;
     font-weight: bold;
 
     padding-left: 12px;
+
+    color: #000;
 
     text-align: left;
   }
