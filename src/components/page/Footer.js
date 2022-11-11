@@ -38,7 +38,6 @@ const Baseboard = styled.footer`
   left: 0;
   padding: 20px 20px;
 
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 700;
   font-size: 17px;

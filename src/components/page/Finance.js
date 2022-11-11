@@ -22,7 +22,6 @@ function Finance() {
       await api
         .get("finances", CONFIG)
         .then((res) => {
-          console.log(res.data);
           setTransations(res.data);
         })
         .catch((err) => {
@@ -59,32 +58,30 @@ function Finance() {
 
   function renderFinances() {
     return transations.map((i) => (
-      <Div key={i.id}>
-        <Li key={i.id} onClick={editValues}>
-          <Date>{i.time}</Date>
-          <Text>{i.description}</Text>
-          <Value
-            style={
-              i.type === "exit" ? { color: "#C70000" } : { color: "#03AC00" }
-            }
-          >
-            {i.value}
-          </Value>
-        </Li>
-      </Div>
+      <Li key={i.id} onClick={editValues}>
+        <Date>{i.time}</Date>
+        <Text>{i.description}</Text>
+        <Value
+          style={
+            i.type === "exit" ? { color: "#C70000" } : { color: "#03AC00" }
+          }
+        >
+          {i.value}
+        </Value>
+      </Li>
     ));
   }
 
   return (
     <>
       {user ? (
-        <Content>
-          {renderFinances()}
-          <Saldo>
-            <p>Saldo: </p>
-            <p className="value">{balance}</p>
-          </Saldo>
-        </Content>
+        <Container>
+          <Content>{renderFinances()}</Content>
+          <BalanceContent>
+            <p>SALDO</p>
+            {balance}
+          </BalanceContent>
+        </Container>
       ) : (
         <Content>
           <p>Não há registros de entrada ou saída</p>
@@ -94,38 +91,70 @@ function Finance() {
   );
 }
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  margin-top: 80px;
+  margin-bottom: 140px;
+`;
+
 const Content = styled.div`
-  width: 326px;
-  height: 63%;
-  margin-bottom: 20px;
-  margin-top: -40px;
+  width: 90%;
+  height: 95%;
 
   display: flex;
   flex-direction: column;
 
-  font-family: "Raleway";
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 23px;
-  text-align: center;
   color: #868686;
 
   background: #ffffff;
-  border-radius: 5px;
-
-  p {
-    width: 180px;
-    height: 46px;
-  }
+  border-radius: 5px 5px 0 0;
 `;
 
-const Div = styled.div`
-  overflow-y: scroll;
-  width: 100%;
-  height: 80%;
+const BalanceContent = styled.div`
+  width: 90%;
+  height: 10%;
 
-  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 5px;
+
+  text-align: right;
+
+  border-radius: 0 0 5px 5px;
+
+  p {
+    width: 70%;
+    font-weight: bold;
+
+    padding-left: 12px;
+
+    text-align: left;
+  }
+
+  background-color: #ffffff;
 `;
 
 const Li = styled.div`
@@ -133,70 +162,37 @@ const Li = styled.div`
   height: 40px;
   display: flex;
 
-  border: 1px solid #000;
-`;
-
-const Text = styled.p`
-  width: 100%;
-  overflow: hidden;
-  font-family: "Raleway";
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
+
+  padding: 10px 5px 0 5px;
 
   color: #000000;
 `;
 
 const Date = styled.p`
-  width: 100%;
+  width: 40%;
 
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
+  text-align: center;
 
   color: #c6c6c6;
 `;
 
-const Value = styled.p`
+const Text = styled.p`
   width: 100%;
-  font-family: "Raleway";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 19px;
-  text-align: right;
 
-  color: #cccccc;
+  text-align: left;
+  padding-left: 10px;
 `;
 
-const Saldo = styled.div`
-  width: 100%;
-  height: auto;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+const Value = styled.p`
+  width: 70%;
 
-  font-weight: bold;
+  padding-right: 10px;
 
-  color: black;
-
-  p {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .value {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  text-align: right;
 `;
 
 export default Finance;
