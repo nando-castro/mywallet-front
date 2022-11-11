@@ -48,17 +48,16 @@ function Finance() {
 
   const balance = getBalance();
 
-  function editValues() {
-    if (transations.type === "add") {
-      navigate("/put-add");
-    } else {
-      navigate("/put-exit");
-    }
+  function editAdd() {
+    navigate("/put-add");
+  }
+  function editExit() {
+    navigate("/put-exit");
   }
 
   function renderFinances() {
     return transations.map((i) => (
-      <Li key={i.id} onClick={editValues}>
+      <Li key={i.id} onClick={i.type === "exit" ? editExit : editAdd}>
         <Date>{i.time}</Date>
         <Text>{i.description}</Text>
         <Value
