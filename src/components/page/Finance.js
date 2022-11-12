@@ -8,6 +8,7 @@ import { api } from "../../services/api";
 function Finance() {
   const { user, setId, setData } = useAuth();
   const [transations, setTransations] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ function Finance() {
     }
     getTransations();
     // eslint-disable-next-line
-  }, []);
+  }, [update]);
 
   function getBalance() {
     if (transations.length > 0) {
@@ -65,25 +66,63 @@ function Finance() {
     navigate("/put-exit");
   }
 
+  function handleDelete(id) {
+    const response = window.confirm(
+      "Voce tem certeza que gostaria de apagar o registro?"
+    );
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    if (response === true) {
+      api
+        .delete(`finances/${id}`, config)
+        .then((res) => {
+          setUpdate(!update);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   function renderFinances() {
     return transations.map((i) => (
-      <Li
-        key={i._id}
-        onClick={
-          i.type === "exit"
-            ? () => editExit(i._id, i.value, i.description)
-            : () => editAdd(i._id, i.value, i.description)
-        }
-      >
-        <Date>{i.time}</Date>
-        <Text>{i.description}</Text>
+      <Li key={i._id}>
+        <Date
+          onClick={
+            i.type === "exit"
+              ? () => editExit(i._id, i.value, i.description)
+              : () => editAdd(i._id, i.value, i.description)
+          }
+        >
+          {i.time}
+        </Date>
+        <Text
+          onClick={
+            i.type === "exit"
+              ? () => editExit(i._id, i.value, i.description)
+              : () => editAdd(i._id, i.value, i.description)
+          }
+        >
+          {i.description}
+        </Text>
         <Value
+          onClick={
+            i.type === "exit"
+              ? () => editExit(i._id, i.value, i.description)
+              : () => editAdd(i._id, i.value, i.description)
+          }
           style={
             i.type === "exit" ? { color: "#C70000" } : { color: "#03AC00" }
           }
         >
           {i.value}
         </Value>
+        <span onClick={() => handleDelete(i._id)}>X</span>
       </Li>
     ));
   }
@@ -209,7 +248,16 @@ const Li = styled.div`
 
   color: #000000;
 
-  cursor: pointer;
+  cursor: default;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    color: #c6c6c6;
+    cursor: pointer;
+  }
 `;
 
 const Date = styled.p`
