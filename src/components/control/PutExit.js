@@ -1,23 +1,21 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { api } from "../../services/api";
 
 function PutExit() {
-  const { user } = useAuth();
+  const { user, id, data } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
 
   const navigate = useNavigate();
 
-  const API_URL = "http://localhost:5000/finances";
-
   function handleExit() {
     const body = {
       value: parseFloat(value),
       description: text,
-      type: "add",
+      type: "exit",
     };
 
     const config = {
@@ -26,12 +24,10 @@ function PutExit() {
       },
     };
 
-    const promise = axios.post(API_URL, body, config);
-
-    promise
+    api
+      .put(`finances/${id}`, body, config)
       .then((res) => {
         navigate("/home");
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -44,14 +40,14 @@ function PutExit() {
         <Form>
           <input
             type="text"
-            placeholder="Valor"
+            placeholder={id !== null ? data.value : "Valor"}
             required
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
           <input
             type="text"
-            placeholder="Descrição"
+            placeholder={id !== null ? data.description : "Descrição"}
             required
             value={text}
             onChange={(e) => setText(e.target.value)}

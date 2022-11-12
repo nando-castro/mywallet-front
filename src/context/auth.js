@@ -4,7 +4,11 @@ export const AuthContext = React.createContext({});
 
 export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
-  const [saldo, setSaldo] = useState(0);
+  const [id, setId] = useState(null);
+  const [data, setData] = useState({
+    value: "",
+    text: "",
+  });
 
   useEffect(() => {
     if (localStorage.getItem("userLogged")) {
@@ -15,7 +19,16 @@ export const AuthProvider = (props) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser, saldo, setSaldo }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        setUser,
+        id,
+        setId,
+        data,
+        setData,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

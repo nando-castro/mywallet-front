@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 
 function Finance() {
-  const { user } = useAuth();
+  const { user, setId, setData } = useAuth();
   const [transations, setTransations] = useState([]);
 
   const navigate = useNavigate();
@@ -48,16 +48,33 @@ function Finance() {
 
   const balance = getBalance();
 
-  function editAdd() {
+  function editAdd(id, value, description) {
+    setId(id);
+    setData({
+      value: value,
+      text: description,
+    });
     navigate("/put-add");
   }
-  function editExit() {
+  function editExit(id, value, description) {
+    setId(id);
+    setData({
+      value,
+      description,
+    });
     navigate("/put-exit");
   }
 
   function renderFinances() {
     return transations.map((i) => (
-      <Li key={i.id} onClick={i.type === "exit" ? editExit : editAdd}>
+      <Li
+        key={i._id}
+        onClick={
+          i.type === "exit"
+            ? () => editExit(i._id, i.value, i.description)
+            : () => editAdd(i._id, i.value, i.description)
+        }
+      >
         <Date>{i.time}</Date>
         <Text>{i.description}</Text>
         <Value

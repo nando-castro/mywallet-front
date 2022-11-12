@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { api } from "../../services/api";
 
 function Post() {
-  const { user, setSaldo } = useAuth();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
@@ -32,7 +31,6 @@ function Post() {
       .then((res) => {
         setLoading(true);
         navigate("/home");
-        setSaldo(value.push());
       })
       .catch((err) => {
         console.log(err);
