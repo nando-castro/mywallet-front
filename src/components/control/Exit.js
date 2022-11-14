@@ -13,7 +13,7 @@ function Exit() {
 
   function handleRemove() {
     const body = {
-      value: parseFloat(value),
+      value: parseFloat(value.replace(",", ".")).toFixed(2),
       description: text,
       type: "exit",
     };

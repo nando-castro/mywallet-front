@@ -132,7 +132,7 @@ const Container = styled.div`
 
   .button {
     width: 80%;
-    heigth: 45px;
+    height: 45px;
     padding: 10px;
     text-align: center;
 

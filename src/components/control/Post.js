@@ -15,7 +15,7 @@ function Post() {
   function handleAdd(e) {
     e.preventDefault();
     const body = {
-      value: parseFloat(value),
+      value: parseFloat(value.replace(",", ".")).toFixed(2),
       description: text,
       type: "add",
     };
@@ -25,6 +25,8 @@ function Post() {
         Authorization: `Bearer ${user.token}`,
       },
     };
+
+    console.log(body);
 
     api
       .post("finances", { ...body }, config)

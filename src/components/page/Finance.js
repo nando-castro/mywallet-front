@@ -37,10 +37,10 @@ function Finance() {
     if (transations.length > 0) {
       return transations.reduce((previous, current) => {
         if (current.type === "add") {
-          return previous + current.value;
+          return (parseFloat(previous) + parseFloat(current.value)).toFixed(2);
         }
 
-        return previous - current.value;
+        return parseFloat(previous) - parseFloat(current.value).toFixed(2);
       }, 0);
     } else {
       return 0;

@@ -13,7 +13,7 @@ function PutPost() {
 
   function handleAdd() {
     const body = {
-      value: parseFloat(value),
+      value: parseFloat(value.replace(",", ".")).toFixed(2),
       description: text,
       type: "add",
     };
