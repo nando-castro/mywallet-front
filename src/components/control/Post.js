@@ -26,8 +26,6 @@ function Post() {
       },
     };
 
-    console.log(body);
-
     api
       .post("finances", { ...body }, config)
       .then((res) => {
