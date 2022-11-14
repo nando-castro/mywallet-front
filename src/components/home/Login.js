@@ -6,6 +6,7 @@ import Button from "../button/Button";
 import logo from "../../assets/img/logo.png";
 import { useAuth } from "../../context/auth";
 import Loader from "../loading/Loader";
+import { api } from "../../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -26,26 +27,25 @@ function Login() {
     e.preventDefault();
     setLoading(true);
 
-    const promise = axios.post("http://localhost:5000/sign-in", {
-      ...userLogin,
-    });
-    promise.then((response) => {
-      setUser(response.data);
-      setLoading(true);
-      navigate("/home");
+    api
+      .post("sign-in", { ...userLogin })
+      .then((response) => {
+        setUser(response.data);
+        setLoading(true);
+        navigate("/home");
 
-      const person = {
-        name: response.data.name,
-        email: response.data.email,
-        token: response.data.token,
-        saldo: response.data.saldo,
-      };
-      localStorage.setItem("userLogged", JSON.stringify(person));
-    });
+        const person = {
+          name: response.data.name,
+          email: response.data.email,
+          token: response.data.token,
+          saldo: response.data.saldo,
+        };
+        localStorage.setItem("userLogged", JSON.stringify(person));
+      })
 
-    promise.catch((err) => {
-      setLoading(false);
-    });
+      .catch((err) => {
+        setLoading(false);
+      });
   }
 
   function ChangeInput(e) {

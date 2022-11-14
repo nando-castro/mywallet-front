@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import Loader from "../loading/Loader";
+import { api } from "../../services/api";
 
 function Register() {
   const navigate = useNavigate();
@@ -13,25 +14,23 @@ function Register() {
     name: "",
     email: "",
     password: "",
-    passconfirm: "",
+    passwordConfirm: "",
   });
 
   function register(e) {
     e.preventDefault();
     setLoading(true);
 
-    const promise = axios.post("http://localhost:5000/sign-up", {
-      ...userRegister,
-    });
-    promise.then((res) => {
-      console.log(res.data);
-      navigate("/");
-      setLoading(false);
-    });
-    promise.catch((err) => {
-      console.log(err);
-      setLoading(false);
-    });
+    api
+      .post("sign-up", { ...userRegister })
+      .then((res) => {
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }
 
   function ChangeInput(e) {
@@ -67,8 +66,8 @@ function Register() {
         <input
           type="password"
           placeholder="Confirme a senha"
-          value={userRegister.passconfirm}
-          name="passconfirm"
+          value={userRegister.passwordConfirm}
+          name="passwordConfirm"
           onChange={ChangeInput}
         />
 
