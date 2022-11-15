@@ -64,6 +64,7 @@ function Login() {
 
       <Form>
         <input
+          autocomplete="off"
           type="email"
           disabled={loading ? true : false}
           placeholder="E-mail"
@@ -72,6 +73,7 @@ function Login() {
           onChange={ChangeInput}
         />
         <input
+          autocomplete="off"
           type="password"
           disabled={loading ? true : false}
           placeholder="Senha"
@@ -118,6 +120,8 @@ const Container = styled.div`
     border-radius: 5px;
     margin-bottom: 6px;
 
+    padding-left: 10px;
+
     background: #ffffff;
 
     font-family: "Raleway";
@@ -127,10 +131,6 @@ const Container = styled.div`
     line-height: 23px;
 
     color: #000000;
-  }
-
-  input::placeholder {
-    padding-left: 10px;
   }
 
   .button {

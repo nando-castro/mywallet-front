@@ -26,8 +26,7 @@ function Finance() {
         .then((res) => {
           setTransations(res.data);
         })
-        .catch((err) => {
-        });
+        .catch((err) => {});
     }
     getTransations();
     // eslint-disable-next-line
@@ -40,7 +39,7 @@ function Finance() {
           return (parseFloat(previous) + parseFloat(current.value)).toFixed(2);
         }
 
-        return parseFloat(previous) - parseFloat(current.value).toFixed(2);
+        return (parseFloat(previous) - parseFloat(current.value)).toFixed(2);
       }, 0);
     } else {
       return 0;

@@ -17,7 +17,7 @@ function Post() {
   function handleAdd(e) {
     e.preventDefault();
 
-    if (!isNaN(value) === false) {
+    if (!isNaN(value.replace(",", ".")) === false) {
       return toast.error("Digite um valor válido!");
     }
     const body = {
@@ -117,6 +117,8 @@ const Poster = styled.div`
     border: 1px solid #d5d5d5;
     margin-bottom: 6px;
 
+    padding-left: 10px;
+
     background: #ffffff;
     border-radius: 5px;
 
@@ -129,10 +131,6 @@ const Poster = styled.div`
     color: #000000;
 
     margin-top: 10px;
-  }
-
-  input::placeholder {
-    padding-left: 10px;
   }
 
   .button {

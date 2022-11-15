@@ -26,6 +26,7 @@ function Register() {
       .then((res) => {
         navigate("/");
         setLoading(false);
+        toast.success("Cadastro realizado com sucesso!");
       })
       .catch((err) => {
         setLoading(false);
@@ -55,6 +56,7 @@ function Register() {
 
       <Form>
         <input
+          autocomplete="off"
           type="text"
           placeholder="Nome"
           value={userRegister.name}
@@ -62,6 +64,7 @@ function Register() {
           onChange={ChangeInput}
         />
         <input
+          autocomplete="off"
           type="email"
           placeholder="E-mail"
           value={userRegister.email}
@@ -125,6 +128,8 @@ const Container = styled.div`
 
     border: 1px solid #d5d5d5;
 
+    padding-left: 10px;
+
     margin-bottom: 6px;
 
     background: #ffffff;
@@ -137,10 +142,6 @@ const Container = styled.div`
     line-height: 23px;
 
     color: #000000;
-  }
-
-  input::placeholder {
-    padding-left: 10px;
   }
 
   .button {

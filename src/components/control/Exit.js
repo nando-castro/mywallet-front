@@ -121,6 +121,8 @@ const Poster = styled.div`
     background: #ffffff;
     border-radius: 5px;
 
+    padding-left: 10px;
+
     font-family: "Raleway";
     font-style: normal;
     font-weight: 400;
@@ -130,10 +132,6 @@ const Poster = styled.div`
     color: #000000;
 
     margin-top: 10px;
-  }
-
-  input::placeholder {
-    padding-left: 10px;
   }
 
   .button {
