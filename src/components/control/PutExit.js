@@ -19,6 +19,7 @@ function PutExit() {
     setLoading(true);
 
     if (!isNaN(value.replace(",", ".")) === false) {
+      setLoading(false);
       return toast.error("Digite um valor válido!");
     }
 
