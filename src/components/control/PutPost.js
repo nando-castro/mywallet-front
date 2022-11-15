@@ -72,9 +72,15 @@ function PutPost() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="button" onClick={handleAdd}>
-            Atualizar entrada
-          </div>
+          {loading === true ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <div className="button" onClick={handleAdd}>
+              Atualizar entrada
+            </div>
+          )}
         </Form>
       </Poster>
     </>

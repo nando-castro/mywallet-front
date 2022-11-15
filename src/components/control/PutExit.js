@@ -71,9 +71,15 @@ function PutExit() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="button" onClick={handleExit}>
-            Atualizar saída
-          </div>
+          {loading === true ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <div className="button" onClick={handleExit}>
+              Atualizar saída
+            </div>
+          )}
         </Form>
       </Poster>
     </>
