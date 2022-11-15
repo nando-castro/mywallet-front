@@ -8,20 +8,24 @@ import PutPost from "./control/PutPost";
 import Login from "./home/Login";
 import Register from "./home/Register";
 import Main from "./page/Main";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/sign-up" element={<Register />} />
-        <Route path="/home" element={<Main />} />
-        <Route path="/add" element={<Post />} />
-        <Route path="/exit" element={<Exit />} />
-        <Route path="/put-add" element={<PutPost />} />
-        <Route path="/put-exit" element={<PutExit />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <ToastContainer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/sign-up" element={<Register />} />
+          <Route path="/home" element={<Main />} />
+          <Route path="/add" element={<Post />} />
+          <Route path="/exit" element={<Exit />} />
+          <Route path="/put-add" element={<PutPost />} />
+          <Route path="/put-exit" element={<PutExit />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

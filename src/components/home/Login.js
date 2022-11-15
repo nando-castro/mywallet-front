@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import Button from "../button/Button";
 import logo from "../../assets/img/logo.png";
 import { useAuth } from "../../context/auth";
 import Loader from "../loading/Loader";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 function Login() {
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ function Login() {
       })
 
       .catch((err) => {
+        toast('Errors')
         setLoading(false);
       });
   }
