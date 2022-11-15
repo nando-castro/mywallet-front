@@ -110,6 +110,7 @@ const Container = styled.div`
   }
 
   input {
+    max-width: 45vh;
     width: 80%;
     height: 45px;
     background: #a328d6;
