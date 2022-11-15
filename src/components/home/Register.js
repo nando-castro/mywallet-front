@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/img/logo.png";
 import Loader from "../loading/Loader";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 function Register() {
   const navigate = useNavigate();
@@ -28,8 +29,20 @@ function Register() {
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
+        if (err.response.status === 422) {
+          return toast.error("Preencha os dados corretamente!", {
+            autoClose: 3000,
+          });
+        }
+        if (err.response.status === 401) {
+          return toast.error("As senhas devem ser iguais!", {
+            autoClose: 3000,
+          });
+        }
+        toast.error("Ocorreu um erro. Tente novamente!", {
+          autoClose: 2500,
+        });
       });
   }
 

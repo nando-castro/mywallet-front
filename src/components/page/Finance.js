@@ -27,7 +27,6 @@ function Finance() {
           setTransations(res.data);
         })
         .catch((err) => {
-          console.log(err);
         });
     }
     getTransations();
@@ -88,7 +87,6 @@ function Finance() {
           });
         })
         .catch((err) => {
-          console.log(err);
           toast.error("Ocorreu um erro. Tente novamente!", {
             autoClose: 2500,
           });
