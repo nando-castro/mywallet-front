@@ -3,19 +3,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { api } from "../../services/api";
+import Loader from "../loading/Loader";
 import { toast } from "react-toastify";
 
 function Exit() {
   const { user } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   function handleRemove(e) {
     e.preventDefault();
 
-    if (!isNaN(value) === false) {
+    if (!isNaN(value.replace(",", ".")) === false) {
       return toast.error("Digite um valor válido!");
     }
     const body = {
@@ -33,12 +35,14 @@ function Exit() {
     api
       .post("finances", { ...body }, config)
       .then((res) => {
+        setLoading(true);
         toast("Saída adicionada!", {
           autoClose: 2500,
         });
         navigate("/home");
       })
       .catch((err) => {
+        setLoading(false);
         if (err.response.status === 422) {
           return toast.error("Preencha os dados corretamente!", {
             autoClose: 3000,
@@ -69,9 +73,15 @@ function Exit() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="button" onClick={handleRemove}>
-            Salvar saída
-          </div>
+          {loading === true ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <div className="button" onClick={handleRemove}>
+              Salvar saída
+            </div>
+          )}
         </Form>
       </Poster>
     </>

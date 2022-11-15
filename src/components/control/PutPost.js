@@ -3,19 +3,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { api } from "../../services/api";
+import Loader from "../loading/Loader";
 import { toast } from "react-toastify";
 
 function PutPost() {
   const { user, id, data } = useAuth();
   const [value, setValue] = useState("");
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   function handleAdd(e) {
     e.preventDefault();
 
-    if (!isNaN(value) === false) {
+    if (!isNaN(value.replace(",", ".")) === false) {
       return toast.error("Digite um valor válido!");
     }
     const body = {
@@ -33,12 +35,14 @@ function PutPost() {
     api
       .put(`finances/${id}`, body, config)
       .then((res) => {
+        setLoading(true);
         toast("Entrada atualizada!", {
           autoClose: 2500,
         });
         navigate("/home");
       })
       .catch((err) => {
+        setLoading(false);
         if (err.response.status === 422) {
           return toast.error("Preencha os dados corretamente!", {
             autoClose: 3000,

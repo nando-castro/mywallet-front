@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import { api } from "../../services/api";
+import Loader from "../loading/Loader";
 import { toast } from "react-toastify";
 
 function Post() {
@@ -41,7 +42,6 @@ function Post() {
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err.response.status === 422);
         setLoading(false);
         if (err.response.status === 422) {
           return toast.error("Preencha os dados corretamente!", {
@@ -72,9 +72,15 @@ function Post() {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <div className="button" onClick={handleAdd}>
-            Salvar entrada
-          </div>
+          {loading === true ? (
+            <>
+              <Loader />
+            </>
+          ) : (
+            <div className="button" onClick={handleAdd}>
+              Salvar entrada
+            </div>
+          )}
         </Form>
       </Poster>
     </>
