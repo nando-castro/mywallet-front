@@ -41,10 +41,15 @@ function Login() {
           saldo: response.data.saldo,
         };
         localStorage.setItem("userLogged", JSON.stringify(person));
+        toast.success("Login realizado!", {
+          autoClose: 2500,
+        });
       })
 
       .catch((err) => {
-        toast('Errors')
+        toast.error("Dados incorretos!", {
+          autoClose: 3000,
+        });
         setLoading(false);
       });
   }

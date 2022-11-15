@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
+import { toast } from "react-toastify";
 
 function Finance() {
   const { user, setId, setData } = useAuth();
@@ -82,9 +83,15 @@ function Finance() {
         .delete(`finances/${id}`, config)
         .then((res) => {
           setUpdate(!update);
+          toast.success("Item deletado!", {
+            autoClose: 2500,
+          });
         })
         .catch((err) => {
           console.log(err);
+          toast.error("Ocorreu um erro. Tente novamente!", {
+            autoClose: 2500,
+          });
         });
     }
   }
