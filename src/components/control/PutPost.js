@@ -16,6 +16,7 @@ function PutPost() {
 
   function handleAdd(e) {
     e.preventDefault();
+    setLoading(true);
 
     if (!isNaN(value.replace(",", ".")) === false) {
       return toast.error("Digite um valor válido!");
